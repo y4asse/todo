@@ -10,14 +10,14 @@
 	<form action="insert-servlet" method="post">
 	<label>Todo: </label><input type="text" name="<%=Parameters.TODO %>"><br>
 	<label>Limit: </label><input type="date" name="<%=Parameters.TIME_LIMIT %>"> <br>
-	<input type="submit" value="Todoを登録する">
+	<input type="submit" value="Todoを登録する"><br>
 	<form>	
 	<%
 		List<TodoDTO> todoList = (List) request.getAttribute("todoList");
 	%>
 
 	<% for(TodoDTO todo: todoList){  %>
-		<%=todo.getTodo() %> 期限：<%=todo.getTimeLimit() %><br>
+		<%=todo.getTodo() %> 期限：<%=todo.getTimeLimit() %> <a href="update-servlet?<%=Parameters.TODO_ID %>=<%= todo.getId() %>">todoを更新</a><br>
 	<% } %>
 
 </body>

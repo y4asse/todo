@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -10,19 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.InsertDAO;
+import constant.Parameters;
+import model.UpdateDAO;
+import model.dao.dto.TodoDTO;
 
 /**
- * Servlet implementation class InsertServlet
+ * Servlet implementation class UpdateServlet
  */
-@WebServlet("/InsertServlet")
-public class InsertServlet extends HttpServlet {
+@WebServlet("/update-servlet")
+public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertServlet() {
+    public UpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +32,28 @@ public class InsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		// リクエストパラメータからtodoIdを取得する
+		int todoId = Integer.parseInt(request.getParameter(Parameters.TODO_ID));
+
+		UpdateDAO dao = new UpdateDAO();
+		TodoDTO todo = new TodoDTO();
+		try {
+			// todoの取得
+			todo = dao.getTodo(todoId);
+		} catch (SQLException | ClassNotFoundException e ) {
+			e.printStackTrace();
+		}
+
+		request.setAttribute("todo", todo);
+		request.getRequestDispatcher("update.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		// リクエストパラメータのname属性がtodoの値を受け取る
-		String todo = (String) request.getParameter("Parameters.TODO");
-		// リクエストパラメータのname属性がtimeLimitの値を受け取る
-		Date timeLimit = Date.valueOf(request.getParameter("Parameters.TIME_LIMIT"));
-
-		// DAOを生成し、Todoをデータベースに登録する
-		InsertDAO dao = new InsertDAO();
-		try {
-			// 受け取ったパラメータを引数に渡す
-			dao.insertTodo(todo, timeLimit);
-
-		}catch(SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		response.sendRedirect("list-servlet");
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
