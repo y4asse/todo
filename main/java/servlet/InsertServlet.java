@@ -41,9 +41,9 @@ public class InsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		// リクエストパラメータのname属性がtodoの値を受け取る
-		String todo = (String) request.getParameter("todo");
+		String todo = (String) request.getParameter("Parameters.TODO");
 		// リクエストパラメータのname属性がtimeLimitの値を受け取る
-		Date timeLimit = Date.valueOf(request.getParameter("timeLimit"));
+		Date timeLimit = Date.valueOf(request.getParameter("Parameters.TIME_LIMIT"));
 
 		// DAOを生成し、Todoをデータベースに登録する
 		InsertDAO dao = new InsertDAO();
