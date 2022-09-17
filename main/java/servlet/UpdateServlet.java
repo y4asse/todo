@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -52,8 +53,18 @@ public class UpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		int id = Integer.parseInt(request.getParameter(Parameters.TODO_ID));
+		String todo = request.getParameter(Parameters.TODO);
+		Date timeLimit = Date.valueOf(request.getParameter(Parameters.TIME_LIMIT));
+		
+		UpdateDAO dao = new UpdateDAO();
+		try {
+			dao.updateTodo(id,  todo, timeLimit);
+		}catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("list-servlet");
 	}
 
 }

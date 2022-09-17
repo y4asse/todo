@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,5 +44,31 @@ public class UpdateDAO {
 
 		return todo;
 
+	}
+	public int updateTodo(int id, String todo, Date timeLimit) throws SQLException, ClassNotFoundException {
+		// 変更した行数を返却するための変数
+		int processingNumber = 0;
+
+		// SQLを作成
+		StringBuilder sql = new StringBuilder();
+		sql.append(" UPDATE ");
+		sql.append("    todo ");
+		sql.append(" SET ");
+		sql.append("    todo = ? ");
+		sql.append(",   timeLimit = ? ");
+		sql.append(" WHERE ");
+		sql.append("    id = ? ");
+
+		try(Connection con = DBConnection.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql.toString())) {
+			// パラメータに値を設定する
+			pstmt.setString(1, todo);
+			pstmt.setDate(2, timeLimit);
+			pstmt.setInt(3, id);
+
+			// SQLを実行し、実行行数を受け取る
+			processingNumber = pstmt.executeUpdate();
+		}
+		return processingNumber;
 	}
 }
