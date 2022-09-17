@@ -17,7 +17,7 @@
 	%>
 
 	<% for(TodoDTO todo: todoList){  %>
-		<%=todo.getTodo() %> 期限：<%=todo.getTimeLimit() %> <a href="update-servlet?<%=Parameters.TODO_ID %>=<%= todo.getId() %>">todoを更新</a><br>
+		<%=todo.getTodo() %> 期限：<%=todo.getTimeLimit() %> <a href="update-servlet?<%=Parameters.TODO_ID %>=<%= todo.getId() %>">todoを更新</a> <a href="delete-servlet?<%=Parameters.TODO_ID %>=<%=todo.getId() %>">todoを削除する</a><br>
 	<% } %>
 
 </body>

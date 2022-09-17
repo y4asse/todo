@@ -15,7 +15,7 @@ import model.dao.InsertDAO;
 /**
  * Servlet implementation class InsertServlet
  */
-@WebServlet("/InsertServlet")
+@WebServlet("/insert-servlet")
 public class InsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,9 +40,9 @@ public class InsertServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		// リクエストパラメータのname属性がtodoの値を受け取る
-		String todo = (String) request.getParameter("Parameters.TODO");
+		String todo = (String) request.getParameter("todo");
 		// リクエストパラメータのname属性がtimeLimitの値を受け取る
-		Date timeLimit = Date.valueOf(request.getParameter("Parameters.TIME_LIMIT"));
+		Date timeLimit = Date.valueOf(request.getParameter("timeLimit"));
 
 		// DAOを生成し、Todoをデータベースに登録する
 		InsertDAO dao = new InsertDAO();
