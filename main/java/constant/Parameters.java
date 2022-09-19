@@ -16,4 +16,8 @@ public class Parameters {
 	 * Todoの期限をやりとりするパラメータ
 	 */
 	public static final String TIME_LIMIT = "timeLimit";
+	
+	public static final String LOGIN_ID = "loginId";
+	
+	public static final String LOGIN_PASSWORD = "loginPassword";
 }
