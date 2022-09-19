@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import constant.Parameters;
+import constant.SessionInfo;
 import model.dao.LoginDAO;
 /**
  * Servlet implementation class LoginServlet
@@ -55,7 +56,10 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute(SessionInfo.LOGIN_USER_ID, loginId);
 			path = "list-servlet";
+		}else {
+			path = "login.jsp";
 		}
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 }
