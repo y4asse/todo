@@ -32,6 +32,6 @@ public class LoginDAO {
 						resId = res.getString("id");
 					}
 		}
-		return resId;
+		return resId; //成功: id / 失敗: 空文字
 	}
 }
