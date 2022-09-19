@@ -16,7 +16,7 @@ import model.dao.InsertDAO;
  * Servlet implementation class InsertServlet
  */
 @WebServlet("/insert-servlet")
-public class InsertServlet extends HttpServlet {
+public class InsertServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -30,14 +30,14 @@ public class InsertServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	
+	protected void exec (HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, ClassNotFoundException, SQLException {
 		request.setCharacterEncoding("UTF-8");
 		// リクエストパラメータのname属性がtodoの値を受け取る
 		String todo = (String) request.getParameter("todo");
@@ -46,14 +46,7 @@ public class InsertServlet extends HttpServlet {
 
 		// DAOを生成し、Todoをデータベースに登録する
 		InsertDAO dao = new InsertDAO();
-		try {
-			// 受け取ったパラメータを引数に渡す
-			dao.insertTodo(todo, timeLimit);
-
-		}catch(SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		dao.insertTodo(todo, timeLimit);
 		response.sendRedirect("list-servlet");
 	}
 

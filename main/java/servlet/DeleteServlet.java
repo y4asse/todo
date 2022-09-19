@@ -30,23 +30,13 @@ public class DeleteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	
+	protected void exec (HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, ClassNotFoundException, SQLException {
 		int id = Integer.parseInt(request.getParameter(Parameters.TODO_ID));
 		DeleteDAO dao = new DeleteDAO();
-		try {
-			dao.deleteTodo(id);
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		dao.deleteTodo(id);
 		response.sendRedirect("list-servlet");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
