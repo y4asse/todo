@@ -12,7 +12,7 @@ public class DBConnection {
                 // データベースにアクセスするユーザー
 		final String USER = "root";
                 // パスワード
-		final String PASSWORD = "Tpexbsk3238";
+		final String PASSWORD = "password";
 
 		Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 
